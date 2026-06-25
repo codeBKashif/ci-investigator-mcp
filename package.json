@@ -1,0 +1,51 @@
+{
+  "name": "ci-investigator-mcp",
+  "version": "1.0.0",
+  "description": "MCP server to investigate GitHub Actions CI failures",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "vitest run",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    "prepublishOnly": "npm run build"
+  },
+  "bin": {
+    "ci-investigator-mcp": "dist/server.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "mcp",
+    "github",
+    "ci",
+    "github-actions"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "adm-zip": "^0.5.17",
+    "axios": "^1.18.1",
+    "dotenv": "^17.4.2",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.8",
+    "@types/node": "^26.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.62.0",
+    "@typescript-eslint/parser": "^8.62.0",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.4",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}
