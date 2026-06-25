@@ -1,8 +1,8 @@
 # CI Investigator MCP
 
-MCP server for investigating GitHub Actions CI failures.
+Published MCP server for investigating GitHub Actions CI failures.
 
-This server exposes tools to:
+This package exposes tools to:
 
 - list recent failed workflow runs
 - summarize a failed run from logs
@@ -194,7 +194,6 @@ Returns:
 ## Requirements
 
 - Node.js 20+
-- npm
 - GitHub token in environment
 
 Recommended token permissions:
@@ -203,57 +202,18 @@ Recommended token permissions:
 - `checks:read`
 - `contents:read`
 
-## Setup
+## Using an MCP Client
 
-1. Install dependencies
+Running a server on its own is less useful than wiring it into an MCP client.
 
-```bash
-npm install
-```
-
-2. Configure environment
-
-```bash
-cp .env.example .env
-```
-
-Then set:
-
-```env
-GITHUB_TOKEN=ghp_your_token
-```
-
-3. Build
-
-```bash
-npm run build
-```
-
-## Run
-
-Development mode:
-
-```bash
-npm run dev
-```
-
-Production/stdio mode:
-
-```bash
-npm run build
-npm start
-```
-
-## MCP Client Configuration
-
-Example (local stdio command):
+Set `GITHUB_TOKEN` in your client config:
 
 ```json
 {
   "mcpServers": {
     "ci-investigator": {
-      "command": "node",
-      "args": ["/absolute/path/to/ci-investigator-mcp/dist/server.js"],
+      "command": "npx",
+      "args": ["-y", "ci-investigator-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_your_token"
       }
@@ -262,40 +222,20 @@ Example (local stdio command):
 }
 ```
 
-If installed globally after publish, you can use:
+On Windows, wrap `npx` with `cmd /c`:
 
 ```json
 {
   "mcpServers": {
     "ci-investigator": {
-      "command": "ci-investigator-mcp",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "ci-investigator-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_your_token"
       }
     }
   }
 }
-```
-
-## Development Commands
-
-```bash
-npm run build
-npm run lint
-npm run test
-npm run format
-```
-
-## Project Structure
-
-```text
-src/
-  github/
-  tools/
-  utils/
-  register-tool.ts
-  server.ts
-  types.ts
 ```
 
 ## Troubleshooting
