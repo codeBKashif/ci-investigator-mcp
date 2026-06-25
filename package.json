@@ -27,6 +27,10 @@
     "ci",
     "github-actions"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeBKashif/ci-investigator-mcp.git"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
