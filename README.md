@@ -210,7 +210,7 @@ Set `GITHUB_TOKEN` in your client config:
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "ci-investigator": {
       "command": "npx",
       "args": ["-y", "ci-investigator-mcp"],
@@ -226,7 +226,7 @@ On Windows, wrap `npx` with `cmd /c`:
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "ci-investigator": {
       "command": "cmd",
       "args": ["/c", "npx", "-y", "ci-investigator-mcp"],
@@ -243,6 +243,32 @@ On Windows, wrap `npx` with `cmd /c`:
 - `401` or `403` errors: verify `GITHUB_TOKEN` and permissions.
 - Empty or partial logs: some workflows/log artifacts can be unavailable; the server uses fallback strategies.
 - Run not found: confirm `run_id`, `owner`, and `repo` are correct.
+- IDE can't find `node` or `npx`
+
+Some IDEs (VS Code, Cursor) launch with a limited PATH and can't find Node.js installed via nvm or similar version managers.
+
+Run the following to find the full paths:
+
+​`bash
+which node && which npx
+​`
+
+Then use the full path in your MCP config:
+
+​`jsonc
+{
+  "servers": {
+    "ci-investigator": {
+      "command": "/Users/your-user/.nvm/versions/node/v22.14.0/bin/npx",
+      "args": ["-y", "ci-investigator-mcp"],
+      "env": {
+        "GITHUB_TOKEN": "your_token",
+        "PATH": "/Users/your-user/.nvm/versions/node/v22.14.0/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  }
+}
+​`
 
 ## License
 
